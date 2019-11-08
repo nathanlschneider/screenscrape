@@ -38,8 +38,8 @@ app.get('/url/:url', function (req, res) {
          if (err){
 
          }
-         res.send(`${ipAdd}/images/${filename}.png`)
+         res.send(`${ipAdd}:${port}/${filename}.png`)
       });
   })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`listening on port ${port}`))
