@@ -4,6 +4,7 @@ const port = 8888
 const webshot = require('webshot');
 var os = require("os");
 var ifaces = os.networkInterfaces();
+let ipAdd = '';
 
 Object.keys(ifaces).forEach(function (ifname) {
     var alias = 0;
@@ -17,9 +18,12 @@ Object.keys(ifaces).forEach(function (ifname) {
       if (alias >= 1) {
         // this single interface has multiple ipv4 addresses
         console.log(ifname + ':' + alias, iface.address);
+        ipAdd = iface.address;
       } else {
         // this interface has only one ipv4 adress
         console.log(ifname, iface.address);
+        ipAdd = iface.address;
+
       }
       ++alias;
     });
@@ -34,7 +38,7 @@ app.get('/url/:url', function (req, res) {
          if (err){
 
          }
-         res.send(`${iface.address}/images/${filename}.png`)
+         res.send(`${ipAdd}/images/${filename}.png`)
       });
   })
 
